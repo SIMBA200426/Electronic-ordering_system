@@ -10,7 +10,6 @@
     --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     --radius: 0.75rem;
-    /* 12px */
 }
 
 * {
@@ -61,7 +60,7 @@ a:hover {
     color: var(--secondary);
 }
 
-/* Layout Utilities */
+/* Utilities */
 .container {
     width: 100%;
     margin-right: auto;
@@ -145,6 +144,14 @@ a:hover {
     justify-content: space-between;
 }
 
+.justify-center {
+    justify-content: center;
+}
+
+.justify-end {
+    justify-content: flex-end;
+}
+
 .gap-2 {
     gap: 0.5rem;
 }
@@ -165,6 +172,17 @@ a:hover {
     margin-top: 1rem;
 }
 
+/* Helpers */
+.hidden {
+    display: none !important;
+}
+
+@media (min-width: 1024px) {
+    .md\:hidden {
+        display: none !important;
+    }
+}
+
 /* Components */
 .card {
     background: var(--card);
@@ -175,9 +193,105 @@ a:hover {
     border: 1px solid var(--border);
 }
 
+
 .card:hover {
-    transform: translateY(-2px);
+    transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
+}
+
+.hero-section {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white;
+    padding: 4rem 1rem;
+    border-radius: var(--radius);
+    margin-bottom: 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
+    animation: rotate 20s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, #ffffff, #94a3b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+    color: #cbd5e1;
+    font-size: 1.125rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.product-image-container {
+    aspect-ratio: 16/9;
+    /* Or 1/1 depending on need */
+    background: #f1f5f9;
+    border-radius: calc(var(--radius) - 4px);
+    margin-bottom: 1rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.05);
+}
+
+.category-pill {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 2rem;
+    font-weight: 600;
+    color: var(--text);
+    transition: all 0.2s;
+}
+
+.category-pill:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
 }
 
 .btn {
@@ -219,7 +333,6 @@ a:hover {
     border: 1px solid var(--border);
     background-color: white;
     margin-bottom: 1rem;
-    font-family: inherit;
     transition: border-color 0.2s;
 }
 
@@ -234,6 +347,67 @@ a:hover {
     margin-bottom: 0.5rem;
     font-weight: 500;
     color: var(--text);
+}
+
+/* Tables */
+.table-container {
+    overflow-x: auto;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: white;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th {
+    background-color: var(--bg);
+    font-weight: 600;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+}
+
+td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* Badges */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.badge-success {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.badge-warning {
+    background: #fef9c3;
+    color: #854d0e;
+}
+
+.badge-danger {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.badge-info {
+    background: #dbeafe;
+    color: #1e40af;
 }
 
 /* Navigation - Drawer */
@@ -304,7 +478,6 @@ a:hover {
     color: var(--primary);
 }
 
-
 /* Header */
 .header {
     background: var(--card);
@@ -352,63 +525,161 @@ a:hover {
     }
 }
 
-/* Tables */
-.table-container {
-    overflow-x: auto;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    background: white;
+/* -------------------------------------------
+   SIDEBAR & ADMIN/CUSTOMER LAYOUT SYSTEM (v2)
+   ------------------------------------------- */
+
+/* Sidebar Shared Styling */
+.app-sidebar,
+.admin-sidebar {
+    background: #0f172a;
+    /* Fallback Color */
+    color: #f1f5f9;
 }
 
-table {
+.app-sidebar .nav-link,
+.admin-sidebar .nav-link {
+    color: #e2e8f0;
+    transition: all 0.2s;
+}
+
+.app-sidebar .nav-link:hover,
+.admin-sidebar .nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.app-sidebar .nav-link span,
+.admin-sidebar .nav-link span {
+    margin-right: 0.75rem;
+    display: inline-block;
+    width: 20px;
+    text-align: center;
+}
+
+/* Main Wrapper for Sidebar Layouts */
+.app-wrapper,
+.admin-wrapper {
+    transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Desktop Sidebar Logic */
+@media (min-width: 1024px) {
+
+    /* Apply desktop sidebar rules if body has .sidebar-mode or .admin-mode */
+    body.sidebar-mode .app-sidebar,
+    body.admin-mode .admin-sidebar {
+        transform: translateX(0) !important;
+        visibility: visible !important;
+        width: 280px;
+        box-shadow: none;
+        border-right: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    body.sidebar-mode .app-wrapper,
+    body.admin-mode .admin-wrapper {
+        margin-left: 280px !important;
+    }
+
+    /* Hide drawer overlay on desktop since sidebar is fixed and persistent */
+    body.sidebar-mode .drawer-overlay,
+    body.admin-mode .drawer-overlay {
+        display: none !important;
+    }
+
+    /* Hide standard hamburger if in sidebar mode (we use persistent sidebar) */
+    body.sidebar-mode .hamburger-mobile-only,
+    body.admin-mode .hamburger-mobile-only {
+        display: none !important;
+    }
+
+    /* Hide the regular hamburger if it appears inside the Sidebar Mode */
+    body.sidebar-mode .hamburger {
+        display: none !important;
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: 1023px) {
+
+    body.sidebar-mode .app-wrapper,
+    body.admin-mode .admin-wrapper {
+        margin-left: 0 !important;
+    }
+
+    .hamburger-mobile-only {
+        display: block !important;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem;
+    }
+}
+
+/* Product Description Rich Text Styling */
+.product-description {
+    line-height: 1.7;
+}
+
+.product-description p {
+    margin-bottom: 1rem;
+}
+
+.product-description p:last-child {
+    margin-bottom: 0;
+}
+
+.product-description h1,
+.product-description h2,
+.product-description h3,
+.product-description h4,
+.product-description h5,
+.product-description h6 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.product-description ul,
+.product-description ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.product-description li {
+    margin-bottom: 0.25rem;
+}
+
+.product-description strong {
+    font-weight: 600;
+}
+
+.product-description em {
+    font-style: italic;
+}
+
+.product-description a {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+.product-description table {
     width: 100%;
     border-collapse: collapse;
-    text-align: left;
+    margin-bottom: 1rem;
 }
 
-th {
+.product-description table td,
+.product-description table th {
+    border: 1px solid var(--border);
+    padding: 0.5rem;
+}
+
+.product-description table th {
     background-color: var(--bg);
     font-weight: 600;
-    padding: 1rem;
-    border-bottom: 1px solid var(--border);
-    white-space: nowrap;
-}
-
-td {
-    padding: 1rem;
-    border-bottom: 1px solid var(--border);
-}
-
-tr:last-child td {
-    border-bottom: none;
-}
-
-/* Badges */
-.badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
-    font-size: 0.75rem;
-    font-weight: 500;
-}
-
-.badge-success {
-    background: #dcfce7;
-    color: #166534;
-}
-
-.badge-warning {
-    background: #fef9c3;
-    color: #854d0e;
-}
-
-.badge-danger {
-    background: #fee2e2;
-    color: #991b1b;
-}
-
-.badge-info {
-    background: #dbeafe;
-    color: #1e40af;
 }

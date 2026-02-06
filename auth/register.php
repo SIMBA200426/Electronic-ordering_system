@@ -50,7 +50,7 @@ include __DIR__ . '/../components/header.php';
         <form method="POST" action="">
             <div class="mb-4">
                 <label class="label" for="name">Full Name</label>
-                <input type="text" id="name" name="name" class="input" required placeholder="John Doe">
+                <input type="text" id="name" name="name" class="input" required placeholder="mustaf cbe">
             </div>
 
             <div class="mb-4">
